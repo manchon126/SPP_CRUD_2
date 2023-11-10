@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="BoardMapper">
+	<!-- 데이터 삽입 -->
+	<insert id="create">
+		insert into boardtest_cuc (title, content, writer)
+		values( #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 행 검색 -->
+	<select id="read" resultType="com.myp.swp.domain.BoardVO">
+		select *
+		from boardtest_cuc
+		where bno = #{bno}
+	</select>
+	
+	<!-- 행 수정 -->
+	<update id="update">
+		update boardtest_cuc
+		set title = #{title}, content = #{content}
+		where bno = #{bno}
+	</update>
+	
+	<!-- 행 삭제 -->
+	<delete id="delete">
+		delete from boardtest_cuc where bno = #{bno}
+	</delete>
+	
+	<!-- board 전체 행 조회 -->
+	<select id="listAll" resultType="com.myp.swp.domain.BoardVO">
+		select *
+		from boardtest_cuc
+		order by bno desc, regdate desc
+	</select>
+	
+	<!-- bno 최대 구하기 -->
+	<select id="getMaxBno" resultType="Integer">
+		select max(bno) from boardtest_cuc
+	</select>
+	
+	<!-- 일정 페이지 씩 조회 -->
+	<select id="listPage" resultType="BoardVO">
+		select *
+		from boardtest_cuc
+		where bno > 0
+		order by bno desc, regdate desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="gettotalcount" resultType="int">
+		select count(bno)
+		from boardtest_cuc
+		where bno > 0;
+	</select>
+</mapper>
