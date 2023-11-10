@@ -1,0 +1,2 @@
+Jquery 적용(뒤로가기, 하이퍼링크),
+CRUD를 RestController, ajax로 구현(json 형태로 통신)

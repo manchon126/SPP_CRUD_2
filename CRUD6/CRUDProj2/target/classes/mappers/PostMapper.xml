@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myp.mapper.PostMapper">
+
+    <!-- Post 테이블 가져오기 -->
+    <select id="getPostList" resultType="com.myp.domain.BoardDTO">
+        SELECT *
+        FROM board_cuc
+    </select>
+
+    <!-- userId로 Post 데이터 가져오기 -->
+    <select id="getPostListByUserId" resultType="com.myp.domain.BoardDTO">
+        SELECT *
+        FROM board_cuc
+        WHERE writer = #{writer}
+    </select>
+
+    <!-- id로 Post 데이터 가져오기 -->
+    <select id="getPostById" resultType="com.myp.domain.BoardDTO">
+        SELECT *
+        FROM board_cuc
+        WHERE bno = #{bno}
+    </select>
+
+    <!-- Post 데이터 추가하기 -->
+    <insert id="insertPost" parameterType="com.myp.domain.BoardDTO">
+        INSERT INTO board_cuc
+            (writer, title, content)
+        VALUES
+            (#{writer}, #{title}, #{content})
+    </insert>
+    
+    <!-- id로 Post 데이터 수정하기 -->
+    <update id="updatePost" parameterType="com.myp.domain.BoardDTO">
+        UPDATE board_cuc
+        SET title = #{title},
+            content = #{content}
+        WHERE bno = #{bno}
+    </update>
+
+    <!-- id로 Post 데이터 삭제하기 -->
+    <delete id="deletePost">
+        DELETE
+        FROM board_cuc
+        WHERE bno = #{bno}
+    </delete>
+    
+</mapper>
